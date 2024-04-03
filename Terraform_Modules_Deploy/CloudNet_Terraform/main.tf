@@ -1,8 +1,7 @@
 # main.tf
 
-module "network" {
-  source  = "./modules/network"
-  # Pass required variables for the network module
+module "networking" {
+  source  = "./modules/networking" 
   environment_name         = var.environment_name
   vpc_cidr                 = var.vpc_cidr
   public_subnet1_cidr      = var.public_subnet1_cidr
@@ -16,3 +15,4 @@ module "network" {
 
 
 
+ 
