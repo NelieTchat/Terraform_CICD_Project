@@ -1,4 +1,5 @@
 #outputs
+
 output "vpc_id" {
   value = aws_vpc.vpc.id
 }
@@ -30,7 +31,6 @@ output "private_subnet4_id" {
 output "nat_gateway_public_ip" {
   value = aws_nat_gateway.nat_gateway.public_ip
 }
-
 
 # output "Instance_linux_publicip" { # this is just a name and it could be anything.
 #   description = "information regarding linux instance public IP"
