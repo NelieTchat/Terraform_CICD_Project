@@ -1,7 +1,7 @@
 # main.tf
 
 module "networking" {
-  source  = "./modules/networking" 
+  source  = "./Modules/networking" 
   environment_name         = var.environment_name
   vpc_cidr                 = var.vpc_cidr
   public_subnet1_cidr      = var.public_subnet1_cidr
