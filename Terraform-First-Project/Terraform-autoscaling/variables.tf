@@ -2,7 +2,7 @@
 variable "aws_region" {
   description = "creating a variable to hold the region name value"
   type        = string
-  default     = "us-east-2"
+  default     = "us-east-1"
 }
 
 variable "vpc_cidr" {
@@ -19,7 +19,7 @@ variable "terra_pub_sub1" {
 variable "aws_availability_zone" {
   description = "Availability zones for VPC"
   type        = string
-  default     = "us-east-2a"
+  default     = "us-east-1a"
 }
 
 variable "terra_priv_sub1" {
@@ -36,13 +36,13 @@ variable "instance_type" {
 variable "instance_key_pair" {
   type        = string
   description = "key pair name"
-  default     = "awesome-key"
+  default     = "DevOps_key_Pair"
 }
 
 variable "cidr_block_mypublic_ip" {
   type        = string
   description = "my public IP"
-  default     = "xx.xxx.xx.2/32" #cidr_blocks = ["11.xx.xx.xx/32"] #replace it with your ip address
+  default     = "24.130.232.243/32" #cidr_blocks = ["11.xx.xx.xx/32"] #replace it with your ip address
 }
 
 variable "instance_type_list" {
