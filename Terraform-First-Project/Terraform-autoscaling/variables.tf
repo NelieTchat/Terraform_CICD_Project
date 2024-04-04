@@ -42,7 +42,7 @@ variable "instance_key_pair" {
 variable "cidr_block_mypublic_ip" {
   type        = string
   description = "my public IP"
-  default     = "24.130.232.243/32" #cidr_blocks = ["11.xx.xx.xx/32"] #replace it with your ip address
+  default     = "xxxxxxxxxxx/32" #cidr_blocks = ["11.xx.xx.xx/32"] #replace it with your ip address
 }
 
 variable "instance_type_list" {
