@@ -9,32 +9,36 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "public_subnet1_cidr" {
+# variable "availability_zones" {
+#   default = data.aws_availability_zones.available.names
+# }
+
+variable "terra_pub_sub1" {
   description = "CIDR block for the first public subnet"
   type        = string
 }
 
-variable "public_subnet2_cidr" {
+variable "terra_pub_sub2" {
   description = "CIDR block for the second public subnet"
   type        = string
 }
 
-variable "private_subnet1_cidr" {
+variable "terra_priv_sub1" {
   description = "CIDR block for the first private subnet"
   type        = string
 }
 
-variable "private_subnet2_cidr" {
+variable "terra_priv_sub2" {
   description = "CIDR block for the second private subnet"
   type        = string
 }
 
-variable "private_subnet3_cidr" {
+variable "terra_priv_sub3" {
   description = "CIDR block for the third private subnet"
   type        = string
 }
 
-variable "private_subnet4_cidr" {
+variable "terra_priv_sub4" {
   description = "CIDR block for the fourth private subnet"
   type        = string
 }
@@ -54,15 +58,15 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "lb_security_group_source_cidr" {
-  description = "CIDR block for allowing inbound traffic to the Load Balancer"
-  type        = string
-}
+# variable "lb_security_group_source_cidr" {
+#   description = "CIDR block for allowing inbound traffic to the Load Balancer"
+#   type        = string
+# }
 
-variable "web_app_security_group_source_cidr" {
-  description = "CIDR block for allowing inbound traffic to the Web Application"
-  type        = string
-}
+# variable "web_app_security_group_source_cidr" {
+#   description = "CIDR block for allowing inbound traffic to the Web Application"
+#   type        = string
+# }
 variable "ssh_access_cidr" {
   type = list(string)
   default = ["0.0.0.0/0"]  # Replace with your desired CIDR block

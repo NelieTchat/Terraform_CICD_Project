@@ -1,52 +1,35 @@
-#outputs
-
-output "vpc_id" {
-  value = aws_vpc.vpc.id
-}
-
-output "public_subnet1_id" {
-  value = aws_subnet.public_subnet1.id
-}
-
-output "public_subnet2_id" {
-  value = aws_subnet.public_subnet2.id
-}
-
-output "private_subnet1_id" {
-  value = aws_subnet.private_subnet1.id
-}
-
-output "private_subnet2_id" {
-  value = aws_subnet.private_subnet2.id
-}
-
-output "private_subnet3_id" {
-  value = aws_subnet.private_subnet3.id
-}
-
-output "private_subnet4_id" {
-  value = aws_subnet.private_subnet4.id
-}
-
-output "nat_gateway_public_ip" {
-  value = aws_nat_gateway.nat_gateway.public_ip
-}
-
-# output "Instance_linux_publicip" { # this is just a name and it could be anything.
-#   description = "information regarding linux instance public IP"
-#   value       = aws_instance.linux_instance[*].public_ip # Display IP address of the Public instance 
-
-# }
-# output "Instance_linux_publicdns" {
-#   description = "information regarding linux instance"
-#   value       = aws_instance.linux_instance[*].public_dns
+# output "vpc_id" {
+#   value = aws_vpc.terra_vpc.id
 # }
 
-# output "Instance_linux_id" {
-#   description = "information regarding linux instance id"
-#   value       =  aws_instance.linux_instance[*].id
+# output "public_subnet_ids" {
+#   value = [
+#     aws_subnet.terra_pub_sub1.id,
+#     aws_subnet.terra_pub_sub2.id
+#   ]
 # }
-# output "Instance_linux_ami" {
-#   description = "information regarding linux instance ami"
-#   value       =  aws_instance.linux_instance[*].ami
+
+# output "private_subnet_ids" {
+#   value = [
+#     aws_subnet.terra_priv_sub1.id,
+#     aws_subnet.terra_priv_sub2.id,
+#     aws_subnet.terra_priv_sub3.id,
+#     aws_subnet.terra_priv_sub4.id
+#   ]
+# }
+
+# output "internet_gateway_id" {
+#   value = aws_internet_gateway.terra_igw.id
+# }
+
+# output "nat_gateway_id" {
+#   value = aws_nat_gateway.nat_gateway.id
+# }
+
+# output "public_route_table_id" {
+#   value = aws_route_table.pub_terra_rt.id
+# }
+
+# output "private_route_table_id" {
+#   value = aws_route_table.priv_terra_rt.id
 # }
