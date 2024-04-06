@@ -23,10 +23,6 @@ variable "terra_pub_subnets" {
     cidr_block = string
   }))
 }
-# variable "public_subnet_ids" {
-#   description = "IDs of the public subnets"
-#   type        = list(string)
-# }
 
 variable "terra_priv_subnets" {
   type = map(object({

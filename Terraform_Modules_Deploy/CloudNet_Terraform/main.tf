@@ -12,27 +12,17 @@ module "networking" {
   load_balancer_sg        = var.load_balancer_sg
   db_sg                   = var.db_sg
 
-  # public_subnet_ids       = var.public_subnet_ids
-  terra_nat_gateway       = var.terra_nat_gateway  # Make sure this variable exists
+  terra_nat_gateway       = var.terra_nat_gateway 
 }
 
-# module "webapp" {
-#   source = "./Modules/webapp"
 
-#   terra_lb                        = var.terra_lb
-#   internal_lb                    = var.internal_lb
-#   lb_listener_port               = var.lb_listener_port
-#   terra_tg                       = var.terra_tg
-#   target_group_port              = var.target_group_port
-#   health_check_interval          = var.health_check_interval
-#   health_check_timeout           = var.health_check_timeout
-#   health_check_healthy_threshold = var.health_check_healthy_threshold
-#   health_check_unhealthy_threshold = var.health_check_unhealthy_threshold
+module "webapp" {
+  source = "./webapp"
 
-#   public_subnet_ids       = module.networking.public_subnet_ids  # Use the output from networking module
-#   private_subnet_ids      = module.networking.private_subnet_ids
-#   public_subnet_cidr_blocks  = module.networking.public_subnet_cidr_blocks
-#   private_subnet_cidr_blocks = module.networking.private_subnet_cidr_blocks
-#   nat_gateway_eip         = module.networking.nat_gateway_eip
-# }
-
+  # instance_type            = var.instance_type
+  
+  vpc_id                   = var.vpc_id
+  webapp_security_group_id = var.webapp_security_group_id
+  # ami_id                   = var.ami_id
+  # instance_profile_arn     = var.instance_profile_arn
+}
