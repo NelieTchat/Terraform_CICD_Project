@@ -1,4 +1,3 @@
-# module/vnetworking/variable
 variable "aws_region" {
   description = "The region where the VPC will be created."
   type        = string
@@ -14,7 +13,7 @@ variable "aws_availability_zone" {
   type        = string
 }
 
-variable "nat_gateway_subnet_name" {
+variable "terra_nat_gateway" {
   type        = string
   description = "Name of the public subnet for the NAT gateway"
 }
@@ -24,6 +23,10 @@ variable "terra_pub_subnets" {
     cidr_block = string
   }))
 }
+# variable "public_subnet_ids" {
+#   description = "IDs of the public subnets"
+#   type        = list(string)
+# }
 
 variable "terra_priv_subnets" {
   type = map(object({
@@ -31,3 +34,17 @@ variable "terra_priv_subnets" {
   }))
 }
 
+variable "webapp_sg" {
+  description = "Name of the security group for the web application"
+  type        = string
+}
+
+variable "load_balancer_sg" {
+  description = "Name of the security group for the load balancer"
+  type        = string
+}
+
+variable "db_sg" {
+  description = "Name of the security group for the database"
+  type        = string
+}

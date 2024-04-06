@@ -16,4 +16,3 @@ output "private_subnet_cidr_blocks" {
 output "nat_gateway_eip" {
   value = aws_eip.nat_eip.id
 }
-
