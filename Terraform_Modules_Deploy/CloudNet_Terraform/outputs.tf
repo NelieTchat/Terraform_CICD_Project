@@ -1,10 +1,13 @@
-
-output "public_subnet_ids" {
-  value = module.networking.public_subnet_ids
+output "load_balancer_sg_id" {
+  value = module.networking.load_balancer_sg_id
 }
 
-output "private_subnet_ids" {
-  value = module.networking.private_subnet_ids
+output "webapp_sg_id" {
+  value = module.networking.webapp_sg_id
+}
+
+output "db_sg_id" {
+  value = module.networking.db_sg_id
 }
 
 output "public_subnet_cidr_blocks" {

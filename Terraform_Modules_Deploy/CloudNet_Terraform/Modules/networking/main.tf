@@ -1,6 +1,6 @@
 
 # VPC
-resource "aws_vpc" "terra-vpc" {
+resource "aws_vpc" "vpc" {
   cidr_block          = var.vpc_cidr
   enable_dns_support  = true
   enable_dns_hostnames = true
@@ -12,7 +12,7 @@ resource "aws_vpc" "terra-vpc" {
 
 # Internet Gateway
 resource "aws_internet_gateway" "terra-igw" {
-  vpc_id = aws_vpc.terra-vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   tags = {
     Name = "terra-igw"
@@ -23,7 +23,7 @@ resource "aws_internet_gateway" "terra-igw" {
 resource "aws_subnet" "terra-pub-sub" {
   for_each = var.terra_pub_subnets
 
-  vpc_id            = aws_vpc.terra-vpc.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = each.value.cidr_block
   availability_zone = var.aws_availability_zone
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "terra-pub-sub" {
 
 # Public Route Table
 resource "aws_route_table" "pub-terra-rt" {
-  vpc_id = aws_vpc.terra-vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -69,7 +69,7 @@ resource "aws_nat_gateway" "nat_gateway" {
 resource "aws_subnet" "terra-priv-sub" {
   for_each = var.terra_priv_subnets
 
-  vpc_id            = aws_vpc.terra-vpc.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = each.value.cidr_block
   availability_zone = var.aws_availability_zone
 
@@ -80,7 +80,7 @@ resource "aws_subnet" "terra-priv-sub" {
 
 # Private Route Table
 resource "aws_route_table" "priv-terra-rt" {
-  vpc_id = aws_vpc.terra-vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -102,7 +102,7 @@ resource "aws_route_table_association" "priv-terra-rt" {
 
 # Load Balancer Security Group
 resource "aws_security_group" "load_balancer_sg" {
-  vpc_id = aws_vpc.terra-vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   // Allow TCP traffic on port 80 from anywhere
   ingress {
@@ -135,7 +135,7 @@ resource "aws_security_group" "load_balancer_sg" {
 
 # Web Application Security Group
 resource "aws_security_group" "webapp_sg" {
-  vpc_id = aws_vpc.terra-vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   // Allow TCP traffic on port 80 from the load balancer
   ingress {
@@ -168,7 +168,7 @@ resource "aws_security_group" "webapp_sg" {
 
 # Database Security Group
 resource "aws_security_group" "db_sg" {
-  vpc_id = aws_vpc.terra-vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   // Allow TCP traffic on port 3306 from the web application security group
   ingress {
