@@ -87,20 +87,19 @@ variable "vpc_id" {
   description = "The ID of the VPC."
 }
 
-variable "lt_min_size" {
-  description = "The minimum size of the auto scaling group."
-}
-
-variable "lt_max_size" {
-  description = "The maximum size of the auto scaling group."
-}
-
 variable "lt_desired_capacity" {
   description = "The desired capacity of the auto scaling group."
+  type        = number
 }
 
 variable "lt_target_group_arn" {
   description = "The ARN of the target group for the load balancer."
+  type        = string
+}
+
+variable "lt_min_size" {
+  description = "The minimum size of the auto scaling group."
+  type        = number
 }
 
 variable "lt_subnets" {
@@ -110,8 +109,15 @@ variable "lt_subnets" {
 
 variable "lt_health_check_type" {
   description = "The type of health check for the target group."
+  type        = string
+}
+
+variable "lt_max_size" {
+  description = "The maximum size of the auto scaling group."
+  type        = number
 }
 
 variable "lt_health_check_grace_period" {
   description = "The grace period for the health check."
+  type        = number
 }

@@ -55,5 +55,8 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
-
+variable "webapp_sg_id" {
+  description = "Security group ID for the launch template"
+  type        = string
+}
 

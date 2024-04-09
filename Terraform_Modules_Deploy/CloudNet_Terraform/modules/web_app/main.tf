@@ -1,12 +1,3 @@
-# Create an Application Load Balancer
-# resource "aws_lb" "load_balancer" {
-#   name               = "WebAppLoadBalancer"
-#   internal           = false
-#   load_balancer_type = "application"
-#   security_groups    = [var.networking.load_balancer_sg_id]
-#   subnets            = var.networking.public_subnet_ids
-# }
-
 resource "aws_lb_target_group" "webapp_target_group" {
   name     = "webapp-target-group"
   port     = 80
@@ -50,6 +41,7 @@ resource "aws_launch_template" "webapp_lt" {
 # Create an Auto Scaling Group with the launch template
 resource "aws_autoscaling_group" "webapp_asg" {
   name = "WebAppASG"
+  
   min_size             = var.lt_min_size
   max_size             = var.lt_max_size
   desired_capacity     = var.lt_desired_capacity
@@ -58,5 +50,8 @@ resource "aws_autoscaling_group" "webapp_asg" {
   health_check_type    = var.lt_health_check_type
   health_check_grace_period = var.lt_health_check_grace_period
 
-
+  launch_template {
+    id = aws_launch_template.webapp_lt.id
+    version = aws_launch_template.webapp_lt.latest_version
+  }
 }
