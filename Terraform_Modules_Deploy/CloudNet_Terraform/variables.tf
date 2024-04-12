@@ -13,20 +13,37 @@ variable "aws_availability_zone" {
   type        = string
 }
 
-variable "terra_nat_gateway" {
+# variable "terra_igw" {
+#   description = "Internet gateway for VPC"
+#   type        = string
+# }
+
+variable "nat_gateway_subnet" {
   type        = string
   description = "Name of the public subnet for the NAT gateway"
 }
 
+variable "nat_gateway_subnet_cidr" {
+  type        = string
+  description = "CIDR block for the NAT gateway subnet"
+}
+
+variable "nat_gateway_subnet_az" {
+  type        = string
+  description = "Availability zone for the NAT gateway subnet"
+}
+
 variable "terra_pub_subnets" {
   type = map(object({
-    cidr_block = string
+    cidr_block        = string
+    availability_zone = string # Add availability zone for each subnet
   }))
 }
 
 variable "terra_priv_subnets" {
   type = map(object({
-    cidr_block = string
+    cidr_block        = string
+    availability_zone = string # Add availability zone for each subnet
   }))
 }
 
@@ -40,10 +57,10 @@ variable "load_balancer_sg" {
   type        = string
 }
 
-variable "db_sg" {
-  description = "Name of the security group for the database"
-  type        = string
-}
+# variable "db_sg" {
+#   description = "Name of the security group for the database"
+#   type        = string
+# }
 
 variable "public_subnet_ids" {
   description = "List of public subnet IDs"
@@ -56,7 +73,8 @@ variable "private_subnet_ids" {
 }
 
 variable "load_balancer_sg_id" {
-  type = string
+  description = "Security group ID for the load balancer"
+  type        = string
 }
 
 variable "webapp_sg_id" {
@@ -64,10 +82,10 @@ variable "webapp_sg_id" {
   type        = string
 }
 
-variable "lt_image_id" {
-  description = "AMI ID for the launch template"
-  type        = string
-}
+# variable "lt_image_id" {
+#   description = "AMI ID for the launch template"
+#   type        = string
+# }
 
 variable "lt_instance_type" {
   description = "Instance type for the launch template"
@@ -121,3 +139,5 @@ variable "lt_health_check_grace_period" {
   description = "The grace period for the health check."
   type        = number
 }
+
+

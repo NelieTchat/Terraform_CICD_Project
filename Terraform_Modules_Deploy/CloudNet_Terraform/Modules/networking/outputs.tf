@@ -1,3 +1,4 @@
+# Outputs
 output "public_subnet_ids" {
   value = [for key, subnet in aws_subnet.terra-pub-sub : subnet.id]
 }
@@ -27,6 +28,9 @@ output "webapp_sg_id" {
   value = aws_security_group.webapp_sg.id
 }
 
-output "db_sg_id" {
-  value = aws_security_group.db_sg.id
+# output "db_sg_id" {
+#   value = aws_security_group.db_sg.id
+# }
+output "terra_pub_subnet_keys" {
+  value = keys(var.terra_pub_subnets)
 }

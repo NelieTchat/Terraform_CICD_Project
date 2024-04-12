@@ -3,6 +3,11 @@ variable "aws_region" {
   type        = string
 }
 
+# variable "terra_igw" {
+#   description = "Internet gateway for VPC"
+#   type = string
+# }
+
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string
@@ -13,20 +18,32 @@ variable "aws_availability_zone" {
   type        = string
 }
 
-variable "terra_nat_gateway" {
-  type        = string
-  description = "Name of the public subnet for the NAT gateway"
+variable "nat_gateway_subnet" {
+  type    = string
 }
+
+variable "nat_gateway_subnet_cidr" {
+  type = string
+  description = "CIDR block for the NAT gateway subnet"
+}
+
+variable "nat_gateway_subnet_az" {
+  type = string
+  description = "Availability zone for the NAT gateway subnet"
+}
+
 
 variable "terra_pub_subnets" {
   type = map(object({
-    cidr_block = string
+    cidr_block        = string
+    availability_zone = string  
   }))
 }
 
 variable "terra_priv_subnets" {
   type = map(object({
-    cidr_block = string
+    cidr_block        = string
+    availability_zone = string  
   }))
 }
 
@@ -40,23 +57,9 @@ variable "load_balancer_sg" {
   type        = string
 }
 
-variable "db_sg" {
-  description = "Name of the security group for the database"
-  type        = string
-}
+# variable "db_sg" {
+#   description = "Name of the security group for the database"
+#   type        = string
+# }
 
-variable "public_subnet_ids" {
-  description = "List of public subnet IDs"
-  type        = list(string)
-}
-
-variable "private_subnet_ids" {
-  description = "List of private subnet IDs"
-  type        = list(string)
-}
-
-variable "webapp_sg_id" {
-  description = "Security group ID for the launch template"
-  type        = string
-}
 
