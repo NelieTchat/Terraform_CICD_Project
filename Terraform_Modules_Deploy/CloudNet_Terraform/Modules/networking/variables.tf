@@ -3,11 +3,6 @@ variable "aws_region" {
   type        = string
 }
 
-# variable "terra_igw" {
-#   description = "Internet gateway for VPC"
-#   type = string
-# }
-
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string

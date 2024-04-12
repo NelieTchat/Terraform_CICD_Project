@@ -13,11 +13,6 @@ variable "aws_availability_zone" {
   type        = string
 }
 
-# variable "terra_igw" {
-#   description = "Internet gateway for VPC"
-#   type        = string
-# }
-
 variable "nat_gateway_subnet" {
   type        = string
   description = "Name of the public subnet for the NAT gateway"
@@ -82,10 +77,6 @@ variable "webapp_sg_id" {
   type        = string
 }
 
-# variable "lt_image_id" {
-#   description = "AMI ID for the launch template"
-#   type        = string
-# }
 
 variable "lt_instance_type" {
   description = "Instance type for the launch template"
@@ -140,4 +131,13 @@ variable "lt_health_check_grace_period" {
   type        = number
 }
 
+# Variables
+variable "operator_email" {
+  description = "Email address of the operator for SNS subscription"
+  type        = string
+}
 
+variable "webapp_asg_name" {
+  description = "Name of the Auto Scaling Group"
+  type        = string
+}

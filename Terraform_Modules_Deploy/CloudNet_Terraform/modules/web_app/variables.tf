@@ -66,3 +66,13 @@ variable "public_subnet_ids" {
   description = "The list of public subnet IDs"
   type        = list(string)
 }
+# Variables
+variable "operator_email" {
+  description = "Email address of the operator for SNS subscription"
+  type        = string
+}
+
+variable "webapp_asg_name" {
+  description = "Name of the Auto Scaling Group"
+  type        = string
+}

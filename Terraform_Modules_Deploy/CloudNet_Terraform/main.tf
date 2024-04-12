@@ -35,4 +35,6 @@ module "web_app" {
   load_balancer_sg_id          = var.load_balancer_sg_id
   public_subnet_ids            = module.networking.public_subnet_ids
   # private_subnet_ids           = module.networking.private_subnet_ids
+  operator_email              = var.operator_email
+  webapp_asg_name             = var.webapp_asg_name
 }

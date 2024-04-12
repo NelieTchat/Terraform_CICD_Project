@@ -132,3 +132,63 @@ resource "aws_autoscaling_group" "webapp_asg" {
     version = aws_launch_template.webapp_lt.latest_version
   }
 }
+
+# SNS Topic for Scaling Notifications
+resource "aws_sns_topic" "asg_sns_topic" {
+  name = "asg-scaling-notifications"
+}
+
+# Subscription for Scaling Notifications Email
+resource "aws_sns_topic_subscription" "asg_sns_subscription" {
+  topic_arn  = aws_sns_topic.asg_sns_topic.arn
+  protocol   = "email"
+  endpoint   = var.operator_email
+}
+
+# Auto Scaling Policies
+resource "aws_autoscaling_policy" "scaling_out_policy" {
+  name                   = "cpu-scaling-out"
+  autoscaling_group_name = var.webapp_asg_name
+  policy_type            = "SimpleScaling"
+  adjustment_type        = "ChangeInCapacity"
+  scaling_adjustment      = 1
+  cooldown               = 30
+}
+
+resource "aws_autoscaling_policy" "scaling_in_policy" {
+  name                   = "cpu-scaling-in"
+  autoscaling_group_name = var.webapp_asg_name
+  policy_type            = "SimpleScaling"
+  adjustment_type        = "ChangeInCapacity"
+  scaling_adjustment      = -1
+  cooldown               = 30
+}
+
+# CloudWatch Alarms for Scaling
+resource "aws_cloudwatch_metric_alarm" "cpu_scale_out_alarm" {
+  alarm_name          = "CpuUtilizationAlarm"
+  alarm_description   = "Alarm to scale out web servers based on CPU"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 2
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = 30
+  statistic           = "Average"
+  threshold           = 40
+  alarm_actions       = [aws_autoscaling_policy.scaling_out_policy.arn]
+  treat_missing_data  = "missing"
+}
+
+resource "aws_cloudwatch_metric_alarm" "cpu_scale_in_alarm" {
+  alarm_name          = "LowCpuUtilizationAlarm"
+  alarm_description   = "Alarm to scale in web servers based on CPU"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = 30
+  statistic           = "Average"
+  threshold           = 40
+  alarm_actions       = [aws_autoscaling_policy.scaling_in_policy.arn]
+  treat_missing_data  = "missing"
+}
