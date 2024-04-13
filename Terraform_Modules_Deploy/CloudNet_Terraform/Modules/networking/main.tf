@@ -166,28 +166,28 @@ resource "aws_security_group" "webapp_sg" {
   }
 }
 
-# # Database Security Group
-# resource "aws_security_group" "db_sg" {
-#   vpc_id = aws_vpc.vpc.id
+# Database Security Group
+resource "aws_security_group" "db_sg" {
+  vpc_id = aws_vpc.vpc.id
 
-#   // Allow TCP traffic on port 3306 from the web application security group
-#   ingress {
-#     from_port         = 3306
-#     to_port           = 3306
-#     protocol          = "tcp"
-#     security_groups   = [aws_security_group.webapp_sg.id]  # Updated argument
-#   }
+  // Allow TCP traffic on port 3306 from the web application security group
+  ingress {
+    from_port         = 3306
+    to_port           = 3306
+    protocol          = "tcp"
+    security_groups   = [aws_security_group.webapp_sg.id]  # Updated argument
+  }
 
-#   // Allow outbound traffic to anywhere
-#   egress {
-#     from_port   = 0
-#     to_port     = 0
-#     protocol    = "-1"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
+  // Allow outbound traffic to anywhere
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-#   tags = {
-#     Name = "db-sg"
-#   }
-# }
+  tags = {
+    Name = "db-sg"
+  }
+}
 

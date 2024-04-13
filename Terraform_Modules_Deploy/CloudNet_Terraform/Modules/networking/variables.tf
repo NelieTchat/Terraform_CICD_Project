@@ -52,9 +52,9 @@ variable "load_balancer_sg" {
   type        = string
 }
 
-# variable "db_sg" {
-#   description = "Name of the security group for the database"
-#   type        = string
-# }
+variable "db_sg" {
+  description = "Name of the security group for the database"
+  type        = string
+}
 
 

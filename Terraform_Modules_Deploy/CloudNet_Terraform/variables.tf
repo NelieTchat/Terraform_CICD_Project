@@ -52,17 +52,21 @@ variable "load_balancer_sg" {
   type        = string
 }
 
-# variable "db_sg" {
-#   description = "Name of the security group for the database"
-#   type        = string
-# }
+variable "db_sg" {
+  description = "Name of the security group for the database"
+  type        = string
+}
 
 variable "public_subnet_ids" {
   description = "List of public subnet IDs"
   type        = list(string)
 }
-
 variable "private_subnet_ids" {
+  description = "The list of subnet IDs for the launch template."
+  type        = list(string)
+}
+
+variable "subnet_db_ids" {
   description = "List of private subnet IDs"
   type        = list(string)
 }
@@ -77,6 +81,10 @@ variable "webapp_sg_id" {
   type        = string
 }
 
+variable "db_sg_id" {
+  description = "Security group ID for the launch template"
+  type        = string
+}
 
 variable "lt_instance_type" {
   description = "Instance type for the launch template"
@@ -111,11 +119,6 @@ variable "lt_min_size" {
   type        = number
 }
 
-variable "lt_subnets" {
-  description = "The list of subnet IDs for the launch template."
-  type        = list(string)
-}
-
 variable "lt_health_check_type" {
   description = "The type of health check for the target group."
   type        = string
@@ -140,4 +143,49 @@ variable "operator_email" {
 variable "webapp_asg_name" {
   description = "Name of the Auto Scaling Group"
   type        = string
+}
+
+variable "db_instance_class" {
+  description = "The type of database instance"
+  type        = string
+}
+
+variable "multi_az" {
+  description = "Create replica in a different Availability zone."
+  type        = bool
+}
+
+variable "db_allocated_storage" {
+  description = "The size of the database (Gb)."
+  type        = number
+}
+
+variable "storage_type" {
+  description = "The type of storage."
+  type        = string
+}
+
+variable "master_username" {
+  description = "ARN of the Secrets Manager secret containing the database username."
+  type        = string
+}
+
+variable "master_user_password" {
+  description = "ARN of the Secrets Manager secret containing the database password."
+  type        = string
+}
+
+variable "db_engine_version" {
+  description = "Database engine version (e.g., 8.0.28 for MySQL)"
+  type        = string
+}
+
+variable "db_instance_name" {
+  description = "Name of the RDS DB instance"
+  type        = string
+}
+
+variable "backup_retention_period" {
+  description = "The number of days to retain automated backups"
+  type        = number
 }

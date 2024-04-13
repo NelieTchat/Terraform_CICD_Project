@@ -1,5 +1,3 @@
-
-
 variable "webapp_sg_id" {
   description = "Security group ID for the launch template"
   type        = string
@@ -8,11 +6,6 @@ variable "lt_instance_type" {
   description = "Instance type for the launch template"
   type        = string
 }
-
-# variable "lt_image_id" {
-#   description = "AMI ID for the launch template"
-#   type        = string
-# }
 
 variable "lt_key_pair" {
   description = "Name of the AWS key pair"
@@ -38,11 +31,6 @@ variable "lt_min_size" {
   type        = number
 }
 
-variable "lt_subnets" {
-  description = "The list of subnet IDs for the launch template."
-  type        = list(string)
-}
-
 variable "lt_health_check_type" {
   description = "The type of health check for the target group."
   type        = string
@@ -66,7 +54,12 @@ variable "public_subnet_ids" {
   description = "The list of public subnet IDs"
   type        = list(string)
 }
-# Variables
+
+variable "private_subnet_ids" {
+  description = "The list of subnet IDs for the launch template."
+  type        = list(string)
+}
+
 variable "operator_email" {
   description = "Email address of the operator for SNS subscription"
   type        = string

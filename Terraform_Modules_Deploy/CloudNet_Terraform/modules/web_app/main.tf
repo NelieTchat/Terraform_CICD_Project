@@ -31,9 +31,9 @@ resource "aws_lb_target_group" "webapp_target_group" {
     path                   = "/"
     healthy_threshold      = 2
     unhealthy_threshold    = 2
-    timeout                = 3
+    timeout                = 15
     interval               = 30
-    matcher                = 200
+    matcher                = "200-399"
   }
 
   tags = {
@@ -89,7 +89,7 @@ resource "aws_launch_template" "webapp_lt" {
   name = "WebAppLaunchTemplate"
 
   instance_type           = var.lt_instance_type
-  image_id               = data.aws_ami.Linux_ami.id
+  image_id                = data.aws_ami.Linux_ami.id
   key_name                = var.lt_key_pair  
 
   network_interfaces {
