@@ -1,3 +1,4 @@
+# Get the Latest Amazon Linux AMI
 data "aws_ami" "Linux_ami" {
   most_recent = true
   filter { #filter is a dictionary. The filter will go in AWS and fetch the latest ami. AWs 
@@ -7,6 +8,7 @@ data "aws_ami" "Linux_ami" {
   owners = ["amazon"]
 }
 
+# Web Application Load Balancer
 resource "aws_lb" "webapp_load_balancer" {
   name               = "webapp-load-balancer"
   internal           = false
@@ -19,6 +21,7 @@ resource "aws_lb" "webapp_load_balancer" {
   }
 }
 
+# Web Application Target Group
 resource "aws_lb_target_group" "webapp_target_group" {
   name     = "webapp-target-group"
   port     = 80
@@ -41,6 +44,7 @@ resource "aws_lb_target_group" "webapp_target_group" {
   }
 }
 
+# Listener for the Load Balancer
 resource "aws_lb_listener" "webapp_listener" {
   load_balancer_arn = aws_lb.webapp_load_balancer.arn
   port              = 80
@@ -52,6 +56,7 @@ resource "aws_lb_listener" "webapp_listener" {
   }
 }
 
+# IAM Role for EC2 Instances
 resource "aws_iam_role" "Terraform_Ssm_Role" {
   name = "Terraform_Ssm_Role"
 
@@ -73,6 +78,7 @@ resource "aws_iam_role" "Terraform_Ssm_Role" {
   EOF
 }
 
+# IAM Instance Profile with the Role
 resource "aws_iam_instance_profile" "Terraform_Ssm_Role" {
   name = "Terraform_Ssm_Role"
   role = aws_iam_role.Terraform_Ssm_Role.name

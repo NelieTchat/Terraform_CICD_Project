@@ -70,7 +70,7 @@ resource "aws_route_table_association" "pub-terra-rt" {
   route_table_id = aws_route_table.pub-terra-rt.id
 }
 
-
+# Private Subnets
 resource "aws_subnet" "terra-priv-sub" {
   for_each = var.terra_priv_subnets
 
@@ -84,7 +84,7 @@ resource "aws_subnet" "terra-priv-sub" {
     Name = format("private-subnet-%s", each.key)
   }
 }
-
+# Private Route Tables
 resource "aws_route_table" "priv-terra-rt" {
   for_each = aws_subnet.terra-priv-sub
 
