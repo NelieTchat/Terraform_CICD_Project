@@ -2,7 +2,7 @@
 resource "aws_db_subnet_group" "db_subnet_group" {
   name        = "rds-subnet-group"
   description = "My RDS Subnet Group"
-  subnet_ids  = var.subnet_db_ids
+  subnet_ids  = var.db_subnet_ids
 
   tags = {
     Name = "dbsubnetgroup"
@@ -10,11 +10,11 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 }
 
 # Define primary database
-resource "aws_db_instance" "database" {
+resource "aws_db_instance" "primary_database" {
   identifier              = var.db_instance_name
   allocated_storage       = var.db_allocated_storage
   engine                  = "mysql"
-  engine_version          = var.db_engine_version
+  engine_version          = "8.0.34"
   instance_class          = var.db_instance_class
   username                = var.master_username
   password                = var.master_user_password
@@ -25,25 +25,26 @@ resource "aws_db_instance" "database" {
   storage_type            = var.storage_type
   multi_az                = var.multi_az
   skip_final_snapshot     = true
-
+  backup_retention_period = 7
   tags = {
     Name = var.db_instance_name
   }
 }
 
-# Define read replica
+# Define the read replica
+# db_subnet_group_name    = aws_db_subnet_group.db_subnet_group.name // no need when it's in the same region with the primary
 resource "aws_db_instance" "read_replica" {
-  identifier              = "terra-read-replica"
+
   instance_class          = var.db_instance_class
-  engine                  = "mysql"  # Specify the database engine
-  username                = var.master_username # Specify the username for accessing the read replica
-  password                = var.master_user_password  # Specify the password for accessing the read replica
   publicly_accessible     = false
-  engine_version          = var.db_engine_version
-  allocated_storage       = var.db_allocated_storage
-  db_subnet_group_name    = aws_db_subnet_group.db_subnet_group.name
-  backup_retention_period = var.backup_retention_period
-  replica_mode            = "open-read-only"  # This creates a read replica 
+  replicate_source_db     = aws_db_instance.primary_database.identifier //I added 'identifier' instead of id to identify the primary source
+  availability_zone       = var.read_replica_az
+  backup_retention_period = 7
+  skip_final_snapshot     = true
+  
+  depends_on = [
+    aws_db_instance.primary_database
+  ]
 
   tags = {
     Name = "ReadReplica"

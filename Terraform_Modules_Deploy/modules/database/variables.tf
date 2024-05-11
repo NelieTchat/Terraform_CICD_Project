@@ -1,9 +1,23 @@
+variable "aws_region" {
+  description = "AWS region"
+}
+
+variable "availability_zones" {
+  description = "List of availability zones"
+  type        = list(string)
+}
+
+variable "vpc_id" {
+  description = "ID of the VPC"
+  type = string
+}
+
 variable "db_instance_name" {
   description = "Name of the database"
   type = string
 }
 
-variable "subnet_db_ids" {
+variable "db_subnet_ids" {
   description = "List of private subnet IDs"
   type        = list(string)
 }
@@ -49,7 +63,15 @@ variable "db_sg_id" {
   description = "Security group ID for the launch template"
   type        = string
 }
+
 variable "backup_retention_period" {
   description = "The number of days to retain automated backups"
   type        = number
+}
+
+// creates the read-repliaca in a different availability zone
+variable "read_replica_az" {
+  description = "Availability Zone for the read replica"
+  type        = string
+  default     = "us-east-1c" // specify the az where the db subnet is created
 }
