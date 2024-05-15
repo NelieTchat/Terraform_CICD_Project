@@ -8,11 +8,6 @@ variable "availability_zones" {
   type        = list(string)
 }
 
-variable "image_id" {
-    description = "The AMI ID to use for the web application instances"
-    type = string
-}
-
 variable "instance_type" {
   description = "Instance type for the web application instances"
   type = string

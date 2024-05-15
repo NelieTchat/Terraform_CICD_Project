@@ -126,12 +126,6 @@ resource "aws_route_table" "webapp-private-route-table" {
 # Private Route Table for Database Subnets
 resource "aws_route_table" "db-private-route-table" {
   vpc_id = aws_vpc.MyVpc.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat-gw.id
-  }
-
   tags = {
     Name = "DBPrivateRouteTable"
   }

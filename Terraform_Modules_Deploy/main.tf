@@ -23,7 +23,6 @@ module "web_app" {
   min_size                  = var.min_size
   max_size                  = var.max_size
   desired_capacity          = var.desired_capacity
-  image_id                  = var.image_id
   db_subnet_group_name      = var.db_subnet_group_name
   health_check_type         = var.health_check_type
   health_check_grace_period = var.health_check_grace_period

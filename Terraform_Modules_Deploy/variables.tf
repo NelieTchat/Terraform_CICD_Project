@@ -1,3 +1,4 @@
+// Network variables
 variable "aws_region" {
   description = "The AWS region to deploy resources in"
   type        = string
@@ -18,11 +19,7 @@ variable "availability_zones" {
   type        = list(string)
 }
 
-variable "image_id" {
-  description = "ID of the AMI to use for the instances"
-  type        = string
-}
-
+// Web_app variables
 variable "instance_type" {
   description = "Instance type for the web application instances"
   type        = string
@@ -103,10 +100,6 @@ variable "target_group_arn" {
   type        = string
 }
 
-locals {
-  subnets = module.network.public_subnet_ids
-}
-
 variable "ami_name" {
   description = "Name of the AMI to use for the instances"
   type        = string
@@ -122,11 +115,7 @@ variable "operator_email" {
   type        = string
 }
 
-# variable "load_balancer_arn" {
-#   description = "ARN of the load balancer"
-#   type = string
-# }
-
+// Databse variables
 variable "db_instance_name" {
   description = "Name of the database"
   type        = string
@@ -140,7 +129,6 @@ variable "db_instance_class" {
 variable "multi_az" {
   description = "Create replica in a different Availability zone."
   type        = bool
-
 }
 
 variable "db_allocated_storage" {
